@@ -1,7 +1,7 @@
 moment-tokens
 =============
 
-Some usefull tokens translations for momentjs_, this library adds ``strftime`` method for unix style and ``phpformat`` for php formatingtokens. This library only translates tokes to the native `momentjs` tokens.
+Some usefull tokens translations for momentjs_, this library adds ``strftime`` method for unix style and ``phpFormat`` for php formating tokens. This library only translates tokes to the native `momentjs` tokens.
 
 .. _momentjs: https://github.com/timrwood/moment
 
@@ -34,6 +34,12 @@ Same way on nodejs::
 
     var moment = require("moment-tokens");
     console.log(moment().strftime("%m/%d/%y %I:%M %p %Z"));
+
+TODO
+----
+
+* strptime - parse dates with unix tokens
+* phpparse - parse dates with php tokens
 
 Contributing
 ------------
