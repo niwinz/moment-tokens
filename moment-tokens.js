@@ -132,16 +132,24 @@
     moment.fn.__translateStrftimeToMoment = translateStrftimeToMoment;
     moment.fn.__translatePhpFormat = translatePhpFormat;
 
+    moment.fn.strftimeConvertFormat = function(format) {
+        return format.replace(/%?.|%%/g, translateStrftimeToMoment);
+    };
+
     moment.fn.strftime = function(format) {
         if (!strftimeFormats[format]) {
-            strftimeFormats[format] = format.replace(/%?.|%%/g, translateStrftimeToMoment);
+            strftimeFormats[format] = moment.strftimeConvertFormat(format);
         }
         return this.format(strftimeFormats[format]);
     };
 
+    moment.fn.phpConvertFormat = function(format) {
+        return format.replace(/\\?./g, translatePhpFormat);
+    };
+
     moment.fn.phpFormat = function(format) {
         if (!phpFormats[format]) {
-            phpFormats[format] = format.replace(/\\?./g, translatePhpFormat);
+            phpFormats[format] = moment.phpConvertFormat(format);
         }
         return this.format(phpFormats[format]);
     };
