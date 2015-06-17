@@ -60,6 +60,8 @@
                 return "H";
             case "e":
                 return "zz";
+            case "S":
+                return "o";
             default:
                 return item;
         }
