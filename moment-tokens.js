@@ -60,6 +60,8 @@
                 return "H";
             case "e":
                 return "zz";
+            case "S":
+                return "o";
             default:
                 return item;
         }
@@ -132,18 +134,26 @@
     moment.fn.__translateStrftimeToMoment = translateStrftimeToMoment;
     moment.fn.__translatePhpFormat = translatePhpFormat;
 
-    moment.fn.strftime = function(format) {
+    moment.fn.strftimeConvertFormat = function(format) {
         if (!strftimeFormats[format]) {
-            strftimeFormats[format] = format.replace(/%?.|%%/g, translateStrftimeToMoment);
+          strftimeFormats[format] = format.replace(/%?.|%%/g, translateStrftimeToMoment);
         }
-        return this.format(strftimeFormats[format]);
+        return strftimeFormats[format];
+    };
+
+    moment.fn.strftime = function(format) {
+        return this.format(moment.strftimeConvertFormat(format));
+    };
+
+    moment.fn.phpConvertFormat = function(format) {
+        if (!phpFormats[format]) {
+          phpFormats[format] = format.replace(/\\?./g, translatePhpFormat);
+        }
+        return phpFormats[format];
     };
 
     moment.fn.phpFormat = function(format) {
-        if (!phpFormats[format]) {
-            phpFormats[format] = format.replace(/\\?./g, translatePhpFormat);
-        }
-        return this.format(phpFormats[format]);
+        return this.format(moment.phpConvertFormat(format));
     };
 
     if (typeof module !== "undefined" && module !== null) {
