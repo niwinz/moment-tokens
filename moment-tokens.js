@@ -1,7 +1,7 @@
 (function() {
     var moment, strftimeFormats = {}, phpFormats = {};
 
-    if (typeof require !== "undefined" && require !== null) {
+    if (typeof require !== "undefined" && require !== null && require.amd === undefined) {
         moment = require('moment');
     } else {
         moment = this.moment;
